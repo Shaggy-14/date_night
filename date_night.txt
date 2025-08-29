@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Night?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #ffe6f0;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      color: #d63384;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.2s ease;
+    }
+    .yes {
+      background-color: #ff4d94;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    .no {
+      background-color: #999;
+      color: white;
+      position: absolute;
+    }
+    .message {
+      margin-top: 2rem;
+      font-size: 2rem;
+      color: #d63384;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Will you go on a date night with me? 💕</h1>
+  <button class="btn yes">Yes</button>
+  <button class="btn no">No</button>
+  <div class="message"></div>
+
+  <script>
+    const yesBtn = document.querySelector('.yes');
+    const noBtn = document.querySelector('.no');
+    const message = document.querySelector('.message');
+
+    yesBtn.addEventListener('click', () => {
+      message.textContent = "Yay! Can't wait 😘❤️";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+    });
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.floor(Math.random() * (window.innerWidth - 100));
+      const y = Math.floor(Math.random() * (window.innerHeight - 100));
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+  </script>
+</body>
+</html>
