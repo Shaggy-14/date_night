@@ -6,50 +6,92 @@
   <title>Date Night?</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      background: #ffe6f0;
+      background: linear-gradient(135deg, #ffe6f0, #ffb3d9);
       height: 100vh;
       margin: 0;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 0 10px;
     }
+
     h1 {
       color: #d63384;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 2px 2px #fff;
     }
+
     .btn {
-      padding: 12px 24px;
-      font-size: 1.2rem;
+      padding: 16px 32px;
+      font-size: 1.4rem;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
-      margin: 10px;
+      margin: 15px;
       transition: all 0.2s ease;
     }
+
     .yes {
       background-color: #ff4d94;
       color: white;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
+
     .no {
-      background-color: #999;
+      background-color: #888;
       color: white;
       position: absolute;
     }
+
     .message {
-      margin-top: 2rem;
+      margin-top: 2.5rem;
       font-size: 2rem;
       color: #d63384;
       font-weight: bold;
+      animation: pop 0.6s ease forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      color: #ff4d94;
+      font-size: 22px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .btn {
+        padding: 18px 36px;
+        font-size: 1.5rem;
+        margin: 20px;
+      }
+      .message {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Will you go on a date night with me? 💕</h1>
+  <h1>Hi my love. Will you be interested in a date night with me? 💕</h1>
   <button class="btn yes">Yes</button>
   <button class="btn no">No</button>
   <div class="message"></div>
@@ -63,14 +105,37 @@
       message.textContent = "Yay! Can't wait 😘❤️";
       yesBtn.style.display = "none";
       noBtn.style.display = "none";
+
+      // Burst of hearts on Yes
+      for (let i = 0; i < 20; i++) {
+        createHeart();
+      }
     });
 
     noBtn.addEventListener('mouseover', () => {
-      const x = Math.floor(Math.random() * (window.innerWidth - 100));
-      const y = Math.floor(Math.random() * (window.innerHeight - 100));
+      const x = Math.floor(Math.random() * (window.innerWidth - noBtn.offsetWidth));
+      const y = Math.floor(Math.random() * (window.innerHeight - noBtn.offsetHeight));
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     });
+
+    // Floating hearts in background
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "❤";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.bottom = "-20px";
+      heart.style.fontSize = Math.random() * 15 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 1000);
   </script>
 </body>
 </html>
+
